@@ -30,24 +30,26 @@ public class RegisterTest {
     }
 
 
-    @Test()
-    public void registerUser(){
+    @Test(description = "Register user - Expected: User is succesfully registered", groups = "smoke")
+    public void registerUser() throws InterruptedException {
         driver = new ChromeDriver();
+        Thread.sleep(3000);
         driver.manage().window().maximize();
         driver.get("https://magento.softwaretestingboard.com/");
         //getElement("").click();
+        List<WebElement>list = driver.findElements(By.xpath("//a[contains(text(),'Create an Account')]"));
+        list.get(0).click();
         typeIn(By.id("firstname"), "John");
         typeIn(By.id("lastname"), "Smith");
         typeIn(By.id("email_address"), randomize(6)+ "@test.com");
         typeIn(By.id("password"), "John");
         typeIn(By.id("password-confirmation"), "John");
 
+        WebElement header = getElement(By.cssSelector(".panel.header "));
 
-        List<WebElement>list = driver.findElements(By.xpath("//*[contains(text(),'Sign In')]"));
-        list.get(0).click();
     }
 
-    @Test()
+    @Test(groups = "smoke")
     public void registerUser2(){
         System.out.println("test 2 ");
     }
@@ -57,7 +59,7 @@ public class RegisterTest {
         System.out.println("test 3 ");
     }
 
-    @Test()
+    @Test(groups = "smoke")
     public void registerUser4(){
         System.out.println("test 4 ");
     }
